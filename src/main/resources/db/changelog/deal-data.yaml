@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: webbee
+      changes:
+        - loadData:
+            tableName: currency
+            file: classpath:db/changelog/currency.csv
+            separator: ";"
+  - changeSet:
+      id: 3
+      author: webbee
+      changes:
+        - loadData:
+            tableName: deal_type
+            file: classpath:db/changelog/deal_type.csv
+            separator: ";"
+  - changeSet:
+      id: 4
+      author: webbee
+      changes:
+        - loadData:
+            tableName: deal_status
+            file: classpath:db/changelog/deal_status.csv
+            separator: ";"
+  - changeSet:
+      id: 5
+      author: webbee
+      changes:
+        - loadData:
+            tableName: contractor_role
+            file: classpath:db/changelog/contractor_role.csv
+            separator: ";"

@@ -1,8 +1,11 @@
 package com.webbee.deal.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
 import java.math.BigDecimal;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "deal_sum")
@@ -40,6 +43,14 @@ public class DealSum {
         isActive = active;
     }
 
+    public Boolean getIsMain() {
+        return isMain;
+    }
+
+    public void setIsMain(Boolean main) {
+        isMain = main;
+    }
+
     public Long getId() {
         return id;
     }
@@ -70,13 +81,5 @@ public class DealSum {
 
     public void setCurrency(Currency currency) {
         this.currency = currency;
-    }
-
-    public Boolean getIsMain() {
-        return isMain;
-    }
-
-    public void setIsMain(Boolean main) {
-        isMain = main;
     }
 }

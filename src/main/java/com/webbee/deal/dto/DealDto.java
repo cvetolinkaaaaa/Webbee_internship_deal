@@ -1,10 +1,13 @@
 package com.webbee.deal.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,10 +40,6 @@ public class DealDto {
     private String modifyUserId;
     @JsonProperty("isActive")
     private Boolean isActive;
-//    @JsonProperty("sums")
-//    private List<DealSumDto> sums;
-//    @JsonProperty("contractors")
-//    private List<DealContractorDto> contractors;
 
     public Boolean getIsActive() {
         return isActive;
@@ -153,20 +152,4 @@ public class DealDto {
     public void setModifyUserId(String modifyUserId) {
         this.modifyUserId = modifyUserId;
     }
-
-//    public List<DealSumDto> getSums() {
-//        return sums;
-//    }
-//
-//    public void setSums(List<DealSumDto> sums) {
-//        this.sums = sums;
-//    }
-//
-//    public List<DealContractorDto> getContractors() {
-//        return contractors;
-//    }
-//
-//    public void setContractors(List<DealContractorDto> contractors) {
-//        this.contractors = contractors;
-//    }
 }

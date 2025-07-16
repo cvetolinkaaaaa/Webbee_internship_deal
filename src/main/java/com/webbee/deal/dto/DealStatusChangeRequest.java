@@ -1,13 +1,16 @@
 package com.webbee.deal.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
 public class DealStatusChangeRequest {
 
     @JsonProperty("dealId")
@@ -15,19 +18,4 @@ public class DealStatusChangeRequest {
     @JsonProperty("statusId")
     private String statusId;
 
-    public UUID getDealId() {
-        return dealId;
-    }
-
-    public void setDealId(UUID dealId) {
-        this.dealId = dealId;
-    }
-
-    public String getStatusId() {
-        return statusId;
-    }
-
-    public void setStatusId(String statusId) {
-        this.statusId = statusId;
-    }
 }

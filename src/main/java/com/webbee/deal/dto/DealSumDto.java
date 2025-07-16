@@ -1,8 +1,11 @@
 package com.webbee.deal.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
 import java.math.BigDecimal;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,6 +27,14 @@ public class DealSumDto {
 
     public void setIsActive(Boolean active) {
         isActive = active;
+    }
+
+    public Boolean getIsMain() {
+        return isMain;
+    }
+
+    public void setIsMain(Boolean main) {
+        isMain = main;
     }
 
     public Long getId() {
@@ -48,13 +59,5 @@ public class DealSumDto {
 
     public void setCurrency(CurrencyDto currency) {
         this.currency = currency;
-    }
-
-    public Boolean getIsMain() {
-        return isMain;
-    }
-
-    public void setIsMain(Boolean main) {
-        isMain = main;
     }
 }

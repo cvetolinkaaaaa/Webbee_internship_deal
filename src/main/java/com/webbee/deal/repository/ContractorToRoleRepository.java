@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ContractorToRoleRepository extends JpaRepository<ContractorToRole, ContractorToRoleId> {
-    List<ContractorToRole> findByContractorId(UUID contractorId);
-    List<ContractorToRole> findByRoleId(String roleId);
+
+    List<ContractorToRole> findByIdContractorIdAndIsActiveTrue(UUID contractorId);
+
 }

@@ -1,7 +1,10 @@
 package com.webbee.deal.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "contractor_to_role")
@@ -15,7 +18,7 @@ public class ContractorToRole {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("contractorId")
     @JoinColumn(name = "contractor_id", referencedColumnName = "id")
-    private DealContractor contractor;
+    private DealContractor dealContractor;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("roleId")
@@ -41,12 +44,12 @@ public class ContractorToRole {
         this.id = id;
     }
 
-    public DealContractor getContractor() {
-        return contractor;
+    public DealContractor getDealContractor() {
+        return dealContractor;
     }
 
-    public void setContractor(DealContractor contractor) {
-        this.contractor = contractor;
+    public void setDealContractor(DealContractor dealContractor) {
+        this.dealContractor = dealContractor;
     }
 
     public ContractorRole getRole() {

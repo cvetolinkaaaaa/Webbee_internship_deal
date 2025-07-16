@@ -1,15 +1,21 @@
 package com.webbee.deal.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import com.webbee.deal.entity.Deal;
 import java.time.LocalDateTime;
 import java.util.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
 public class DealContractorDto {
     @JsonProperty("id")
     private UUID id;
+    @JsonProperty("deal")
+    private Deal deal;
     @JsonProperty("contractorId")
     private String contractorId;
     @JsonProperty("name")
@@ -17,7 +23,7 @@ public class DealContractorDto {
     @JsonProperty("inn")
     private String inn;
     @JsonProperty("main")
-    private Boolean main;
+    private Boolean isMain;
     @JsonProperty("createDate")
     private LocalDateTime createDate;
     @JsonProperty("modifyDate")
@@ -28,8 +34,8 @@ public class DealContractorDto {
     private String modifyUserId;
     @JsonProperty("isActive")
     private Boolean isActive;
-    @JsonProperty("roles")
-    private List<ContractorToRoleDto> roles;
+//    @JsonProperty("roles")
+//    private List<ContractorToRoleDto> roles;
 
     public Boolean getIsActive() {
         return isActive;
@@ -39,12 +45,28 @@ public class DealContractorDto {
         isActive = active;
     }
 
+    public Boolean getIsMain() {
+        return isMain;
+    }
+
+    public void setIsMain(Boolean main) {
+        this.isMain = isMain;
+    }
+
     public UUID getId() {
         return id;
     }
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public Deal getDeal() {
+        return deal;
+    }
+
+    public void setDeal(Deal deal) {
+        this.deal = deal;
     }
 
     public String getContractorId() {
@@ -69,14 +91,6 @@ public class DealContractorDto {
 
     public void setInn(String inn) {
         this.inn = inn;
-    }
-
-    public Boolean getMain() {
-        return main;
-    }
-
-    public void setMain(Boolean main) {
-        this.main = main;
     }
 
     public LocalDateTime getCreateDate() {
@@ -109,13 +123,5 @@ public class DealContractorDto {
 
     public void setModifyUserId(String modifyUserId) {
         this.modifyUserId = modifyUserId;
-    }
-
-    public List<ContractorToRoleDto> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<ContractorToRoleDto> roles) {
-        this.roles = roles;
     }
 }

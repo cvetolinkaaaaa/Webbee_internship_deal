@@ -12,4 +12,11 @@ public interface DealContractorMapper {
 
     List<DealContractorDto> toDtoList(List<DealContractor> entityList);
     List<DealContractor> toEntityList(List<DealContractorDto> dtoList);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createDate", ignore = true)
+    @Mapping(target = "isActive", ignore = true)
+    @Mapping(target = "deal", ignore = true)
+    void updateEntityFromDto(DealContractorDto dto, @MappingTarget DealContractor entity);
+
 }

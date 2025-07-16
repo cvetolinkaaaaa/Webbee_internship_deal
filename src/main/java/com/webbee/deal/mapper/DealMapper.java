@@ -1,5 +1,6 @@
 package com.webbee.deal.mapper;
 
+import com.webbee.deal.dto.DealDetailsDto;
 import com.webbee.deal.dto.DealDto;
 import com.webbee.deal.entity.Deal;
 import org.mapstruct.*;
@@ -23,4 +24,13 @@ public interface DealMapper {
     List<DealDto> toDtoList(List<Deal> entityList);
 
     List<Deal> toEntityList(List<DealDto> dtoList);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createDate", ignore = true)
+    @Mapping(target = "createUserId", ignore = true)
+    @Mapping(target = "isActive", ignore = true)
+    @Mapping(target = "status", ignore = true)
+    void updateEntityFromDto(DealDto dto, @MappingTarget Deal entity);
+
+    DealDetailsDto toDetailsDto(Deal deal);
 }

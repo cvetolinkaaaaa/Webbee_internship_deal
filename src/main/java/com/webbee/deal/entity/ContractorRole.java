@@ -1,12 +1,15 @@
 package com.webbee.deal.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Entity
-@Table(name = "contractor_role")
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "contractor_role")
 public class ContractorRole {
 
     @Id

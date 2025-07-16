@@ -6,5 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface DealContractorRepository extends JpaRepository<DealContractor, UUID> {
-    List<DealContractor> findByDealId(UUID dealId);
+
+    List<DealContractor> findByDealIdAndIsActiveTrue(UUID dealId);
+
 }

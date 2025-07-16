@@ -1,22 +1,24 @@
 package com.webbee.deal.service;
 
-import com.webbee.deal.dto.DealDto;
+import com.webbee.deal.dto.*;
 import com.webbee.deal.entity.Deal;
 import com.webbee.deal.entity.DealStatus;
+import com.webbee.deal.entity.DealSum;
 import com.webbee.deal.mapper.DealMapper;
 import com.webbee.deal.repository.DealRepository;
 import com.webbee.deal.repository.DealStatusRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Slf4j
 @Service
 public class DealService {
 
@@ -32,14 +34,18 @@ public class DealService {
 
     @Transactional
     public DealDto saveDeal(DealDto dto) {
-
-        Deal deal = dealMapper.toEntity(dto);
-        if (deal.getId() == null) {
-            deal.setCreateDate(LocalDateTime.now());
+        Deal deal;
+        if (dto.getId() != null) {
+            deal = dealRepository.findById(dto.getId())
+                    .orElseThrow(() -> new EntityNotFoundException("Deal not found: " + dto.getId()));
+            dealMapper.updateEntityFromDto(dto, deal);
+            deal.setModifyDate(LocalDateTime.now());
+        } else {
             DealStatus draftStatus = dealStatusRepository.findById("DRAFT")
-                    .orElseThrow(() -> {
+                   .orElseThrow(() -> {
                         return new IllegalStateException("DRAFT status not found");
-                    });
+                  });
+            deal = dealMapper.toEntity(dto);
             deal.setCreateDate(LocalDateTime.now());
             deal.setModifyDate(LocalDateTime.now());
             deal.setStatus(draftStatus);
@@ -47,12 +53,6 @@ public class DealService {
         }
         Deal saved = dealRepository.save(deal);
         return dealMapper.toDto(saved);
-    }
-
-    @Transactional(readOnly = true)
-    public Optional<DealDto> getDeal(UUID id) {
-        return dealRepository.findById(id)
-                .map(dealMapper::toDto);
     }
 
     @Transactional
@@ -66,12 +66,15 @@ public class DealService {
         if (!status.getIsActive()) {
             throw new IllegalStateException("DealStatus is not active: " + statusId);
         }
-
         deal.setStatus(status);
         deal.setModifyDate(LocalDateTime.now());
-
         Deal saved = dealRepository.save(deal);
         return dealMapper.toDto(saved);
+    }
+
+    public Page<DealDetailsDto> searchDeals(DealSearchRequest filter) {
+        Page<Deal> deals = dealRepository.searchDeals(filter);
+        return deals.map(dealMapper::toDetailsDto);
     }
 
 }

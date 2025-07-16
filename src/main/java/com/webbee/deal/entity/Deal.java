@@ -1,10 +1,13 @@
 package com.webbee.deal.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "deal")
@@ -42,7 +45,6 @@ public class Deal {
     @Column(name = "close_dt")
     private LocalDateTime closeDt;
 
-    // === Служебные поля ===
     @Column(name = "create_date", nullable = false, updatable = false)
     private LocalDateTime createDate = LocalDateTime.now();
 
@@ -58,12 +60,6 @@ public class Deal {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
 
-//    @OneToMany(mappedBy = "deal", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<DealSum> sums = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "deal", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<DealContractor> contractors = new ArrayList<>();
-
     public Boolean getIsActive() {
         return isActive;
     }
@@ -72,16 +68,36 @@ public class Deal {
         isActive = active;
     }
 
-    public void setStatus(DealStatus status) {
-        this.status = status;
-    }
-
     public UUID getId() {
         return id;
     }
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public DealStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(DealStatus status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(String createUserId) {
+        this.createUserId = createUserId;
     }
 
     public String getDescription() {
@@ -132,24 +148,12 @@ public class Deal {
         this.type = type;
     }
 
-    public DealStatus getStatus() {
-        return status;
-    }
-
     public LocalDateTime getCloseDt() {
         return closeDt;
     }
 
     public void setCloseDt(LocalDateTime closeDt) {
         this.closeDt = closeDt;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
     }
 
     public LocalDateTime getModifyDate() {
@@ -160,14 +164,6 @@ public class Deal {
         this.modifyDate = modifyDate;
     }
 
-    public String getCreateUserId() {
-        return createUserId;
-    }
-
-    public void setCreateUserId(String createUserId) {
-        this.createUserId = createUserId;
-    }
-
     public String getModifyUserId() {
         return modifyUserId;
     }
@@ -175,20 +171,4 @@ public class Deal {
     public void setModifyUserId(String modifyUserId) {
         this.modifyUserId = modifyUserId;
     }
-
-//    public List<DealSum> getSums() {
-//        return sums;
-//    }
-//
-//    public void setSums(List<DealSum> sums) {
-//        this.sums = sums;
-//    }
-//
-//    public List<DealContractor> getContractors() {
-//        return contractors;
-//    }
-//
-//    public void setContractors(List<DealContractor> contractors) {
-//        this.contractors = contractors;
-//    }
 }

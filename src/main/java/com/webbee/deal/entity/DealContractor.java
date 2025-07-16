@@ -1,9 +1,12 @@
 package com.webbee.deal.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
 import java.time.LocalDateTime;
 import java.util.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "deal_contractor")
@@ -29,9 +32,8 @@ public class DealContractor {
     private String inn;
 
     @Column(name = "main", nullable = false)
-    private Boolean main = false;
+    private Boolean isMain = false;
 
-    // === Служебные поля ===
     @Column(name = "create_date", nullable = false, updatable = false)
     private LocalDateTime createDate = LocalDateTime.now();
 
@@ -47,15 +49,20 @@ public class DealContractor {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
 
-    @OneToMany(mappedBy = "contractor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ContractorToRole> roles = new ArrayList<>();
-
     public Boolean getIsActive() {
         return isActive;
     }
 
     public void setIsActive(Boolean active) {
         isActive = active;
+    }
+
+    public Boolean getIsMain() {
+        return isMain;
+    }
+
+    public void setIsMain(Boolean main) {
+        this.isMain = isMain;
     }
 
     public UUID getId() {
@@ -72,6 +79,14 @@ public class DealContractor {
 
     public void setDeal(Deal deal) {
         this.deal = deal;
+    }
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
     }
 
     public String getContractorId() {
@@ -98,22 +113,6 @@ public class DealContractor {
         this.inn = inn;
     }
 
-    public Boolean getMain() {
-        return main;
-    }
-
-    public void setMain(Boolean main) {
-        this.main = main;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
     public LocalDateTime getModifyDate() {
         return modifyDate;
     }
@@ -136,13 +135,5 @@ public class DealContractor {
 
     public void setModifyUserId(String modifyUserId) {
         this.modifyUserId = modifyUserId;
-    }
-
-    public List<ContractorToRole> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<ContractorToRole> roles) {
-        this.roles = roles;
     }
 }

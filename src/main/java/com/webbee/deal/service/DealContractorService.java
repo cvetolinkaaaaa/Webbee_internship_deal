@@ -15,6 +15,9 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Сервис для управления контрагентами сделки.
+ */
 @Service
 public class DealContractorService {
 
@@ -23,13 +26,16 @@ public class DealContractorService {
     private final ContractorClient contractorClient;
     private final DealContractorMapper dealContractorMapper;
 
-    public DealContractorService(DealContractorRepository dealContractorRepository, DealRepository dealRepository, ContractorClient contractorClient,DealContractorMapper dealContractorMapper) {
+    public DealContractorService(DealContractorRepository dealContractorRepository, DealRepository dealRepository, ContractorClient contractorClient, DealContractorMapper dealContractorMapper) {
         this.dealContractorRepository = dealContractorRepository;
         this.dealRepository = dealRepository;
         this.contractorClient = contractorClient;
         this.dealContractorMapper = dealContractorMapper;
     }
 
+    /**
+     * Сохраняет или обновляет связь между сделкой и контрагентом.
+     */
     @Transactional
     public void saveDealContractor(DealContractorDto dealContractorDto) {
         ContractorDto contractorDto = contractorClient.getContractor(dealContractorDto.getContractorId());
@@ -42,22 +48,23 @@ public class DealContractorService {
             throw new IllegalArgumentException("Deal with id " + dealContractorDto.getDeal() + " does not exist");
         }
         if (dealContractorDto.getId() != null) {
-            // UPDATE
             entity = dealContractorRepository.findById(dealContractorDto.getId())
                     .orElseThrow(() -> new IllegalArgumentException("DealContractor not found: " + dealContractorDto.getId()));
-            // обновить только разрешённые поля
             dealContractorMapper.updateEntityFromDto(dealContractorDto, entity);
             entity.setModifyDate(LocalDateTime.now());
         } else {
-            // CREATE
             entity = dealContractorMapper.toEntity(dealContractorDto);
             entity.setCreateDate(LocalDateTime.now());
             entity.setModifyDate(LocalDateTime.now());
             entity.setIsActive(true);
         }
 
-        DealContractor saved = dealContractorRepository.save(entity);
+        dealContractorRepository.save(entity);
     }
+
+    /**
+     * Логически удаляет связь между сделкой и контрагентом по идентификатору.
+     */
     @Transactional
     public void deleteDealContractor(UUID dealContractorId) {
         DealContractor dealContractor = dealContractorRepository.findById(dealContractorId)

@@ -40,4 +40,5 @@ class ContractorRoleMapperTest {
         assertThat(entity.getName()).isEqualTo(dto.getName());
         assertThat(entity.getCategory()).isEqualTo(dto.getCategory());
     }
+
 }

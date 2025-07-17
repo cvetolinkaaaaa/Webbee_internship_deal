@@ -40,4 +40,5 @@ class DealStatusMapperTest {
         assertThat(entity.getName()).isEqualTo("Утверждён");
         assertThat(entity.getIsActive()).isFalse();
     }
+
 }

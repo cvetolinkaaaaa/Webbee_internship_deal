@@ -51,8 +51,6 @@ class DealSumMapperTest {
         dto.setIsMain(false);
         dto.setIsActive(false);
 
-        // Можно добавить вложенный CurrencyDto, если он используется
-
         DealSum entity = mapper.toEntity(dto);
 
         assertThat(entity).isNotNull();

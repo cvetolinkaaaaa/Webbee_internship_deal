@@ -37,4 +37,5 @@ class ContractorToRoleIdMapperTest {
         assertThat(entity.getContractorId()).isEqualTo(contractorId);
         assertThat(entity.getRoleId()).isEqualTo("WARRANTY");
     }
+
 }

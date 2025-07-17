@@ -1,24 +1,24 @@
 package com.webbee.deal.service;
 
-import com.webbee.deal.dto.*;
+import com.webbee.deal.dto.DealDetailsDto;
+import com.webbee.deal.dto.DealDto;
+import com.webbee.deal.dto.DealSearchRequest;
 import com.webbee.deal.entity.Deal;
 import com.webbee.deal.entity.DealStatus;
-import com.webbee.deal.entity.DealSum;
 import com.webbee.deal.mapper.DealMapper;
 import com.webbee.deal.repository.DealRepository;
 import com.webbee.deal.repository.DealStatusRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Сервисный класс для управления сделками.
+ */
 @Service
 public class DealService {
 
@@ -32,6 +32,9 @@ public class DealService {
         this.dealStatusRepository = dealStatusRepository;
     }
 
+    /**
+     * Создает или обновляет сделку.
+     */
     @Transactional
     public DealDto saveDeal(DealDto dto) {
         Deal deal;
@@ -55,6 +58,9 @@ public class DealService {
         return dealMapper.toDto(saved);
     }
 
+    /**
+     * Изменяет статус сделки по идентификатору сделки и статуса.
+     */
     @Transactional
     public DealDto changeDealStatus(UUID dealId, String statusId) {
         Deal deal = dealRepository.findById(dealId)
@@ -72,6 +78,9 @@ public class DealService {
         return dealMapper.toDto(saved);
     }
 
+    /**
+     * Выполняет поиск сделок по заданному фильтру и возвращает постраничный результат.
+     */
     public Page<DealDetailsDto> searchDeals(DealSearchRequest filter) {
         Page<Deal> deals = dealRepository.searchDeals(filter);
         return deals.map(dealMapper::toDetailsDto);

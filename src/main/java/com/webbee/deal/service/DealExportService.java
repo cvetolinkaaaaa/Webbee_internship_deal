@@ -4,7 +4,9 @@ import com.webbee.deal.dto.DealContractorShortDto;
 import com.webbee.deal.dto.DealDetailsDto;
 import com.webbee.deal.dto.DealSearchRequest;
 import lombok.RequiredArgsConstructor;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -12,12 +14,19 @@ import org.springframework.stereotype.Service;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
+
+/**
+ * Сервис для экспорта данных о сделках в Excel.
+ */
 @Service
 @RequiredArgsConstructor
 public class DealExportService {
 
     private final DealService dealService;
 
+    /**
+     * Экспортирует сделки, удовлетворяющие фильтру, в Excel-файл формата .xlsx.
+     */
     public byte[] exportDealsToExcel(DealSearchRequest filter) {
         Page<DealDetailsDto> page = dealService.searchDeals(filter);
         List<DealDetailsDto> deals = page.getContent();

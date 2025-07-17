@@ -72,4 +72,5 @@ class ContractorToRoleMapperTest {
         assertThat(entity.getRole().getId()).isEqualTo("WARRANTY");
         assertThat(entity.getIsActive()).isFalse();
     }
+
 }

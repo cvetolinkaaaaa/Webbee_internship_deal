@@ -37,8 +37,6 @@ class DealMapperTest {
         deal.setCreateDate(LocalDateTime.now());
         deal.setIsActive(true);
 
-        // ... Заполни вложенные объекты если они есть в твоём DTO/Entity
-
         DealDto dto = mapper.toDto(deal);
 
         assertThat(dto).isNotNull();
@@ -61,8 +59,6 @@ class DealMapperTest {
         dto.setAgreementStartDt(LocalDateTime.of(2024, 8, 12, 10, 0));
         dto.setAvailabilityDate(LocalDate.of(2024, 12, 31));
         dto.setIsActive(false);
-
-        // ... Заполни вложенные объекты если они есть
 
         Deal deal = mapper.toEntity(dto);
 

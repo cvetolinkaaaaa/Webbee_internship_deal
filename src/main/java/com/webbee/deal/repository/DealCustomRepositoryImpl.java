@@ -5,17 +5,28 @@ import com.webbee.deal.entity.Deal;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+
+/**
+ * Реализация кастомного репозитория для поиска сделок с фильтрацией по различным параметрам.
+ */
 @Repository
 public class DealCustomRepositoryImpl implements DealCustomRepository {
 
     @PersistenceContext
-    private EntityManager em;
+    private EntityManager entityManager;
 
+    /**
+     * Осуществляет поиск сделок по различным фильтрам.
+     */
     @Override
     public Page<Deal> searchDeals(DealSearchRequest filter) {
         StringBuilder jpql = new StringBuilder("SELECT d FROM Deal d WHERE d.isActive = true");
@@ -89,12 +100,12 @@ public class DealCustomRepositoryImpl implements DealCustomRepository {
         String sortField = filter.getSortField() != null ? filter.getSortField() : "agreementDate";
         String sortDir = filter.getSortDir() != null ? filter.getSortDir() : "DESC";
         jpql.append(" ORDER BY d." + sortField + " " + sortDir);
-        TypedQuery<Deal> query = em.createQuery(jpql.toString(), Deal.class);
+        TypedQuery<Deal> query = entityManager.createQuery(jpql.toString(), Deal.class);
         params.forEach(query::setParameter);
         query.setFirstResult(filter.getPage() * filter.getSize());
         query.setMaxResults(filter.getSize());
         List<Deal> deals = query.getResultList();
-        TypedQuery<Long> countQuery = em.createQuery(countJpql.toString(), Long.class);
+        TypedQuery<Long> countQuery = entityManager.createQuery(countJpql.toString(), Long.class);
         params.forEach(countQuery::setParameter);
         Long total = countQuery.getSingleResult();
         return new PageImpl<>(deals, PageRequest.of(filter.getPage(), filter.getSize()), total);

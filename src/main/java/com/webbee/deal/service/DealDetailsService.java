@@ -1,7 +1,18 @@
 package com.webbee.deal.service;
 
-import com.webbee.deal.dto.*;
-import com.webbee.deal.entity.*;
+import com.webbee.deal.dto.ContractorRoleShortDto;
+import com.webbee.deal.dto.DealContractorShortDto;
+import com.webbee.deal.dto.DealDetailsDto;
+import com.webbee.deal.dto.DealStatusShortDto;
+import com.webbee.deal.dto.DealSumShortDto;
+import com.webbee.deal.dto.DealTypeShortDto;
+import com.webbee.deal.entity.ContractorRole;
+import com.webbee.deal.entity.ContractorToRole;
+import com.webbee.deal.entity.Deal;
+import com.webbee.deal.entity.DealContractor;
+import com.webbee.deal.entity.DealStatus;
+import com.webbee.deal.entity.DealSum;
+import com.webbee.deal.entity.DealType;
 import com.webbee.deal.repository.ContractorToRoleRepository;
 import com.webbee.deal.repository.DealContractorRepository;
 import com.webbee.deal.repository.DealRepository;
@@ -12,6 +23,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Сервис получения детализированной информации о сделке.
+ */
 @Service
 public class DealDetailsService {
 
@@ -27,6 +41,9 @@ public class DealDetailsService {
         this.contractorToRoleRepository = contractorToRoleRepository;
     }
 
+    /**
+     * Возвращает подробную информацию по сделке.
+     */
     public DealDetailsDto getDealDetails(UUID dealId) {
         Deal deal = dealRepository.findById(dealId)
                 .orElseThrow(() -> new EntityNotFoundException("Deal not found: " + dealId));

@@ -28,8 +28,6 @@ class DealContractorMapperTest {
         entity.setCreateUserId("user_1");
         entity.setCreateDate(LocalDateTime.now());
 
-        // ... если есть вложенные объекты, заполни их аналогично
-
         DealContractorDto dto = mapper.toDto(entity);
 
         assertThat(dto).isNotNull();
@@ -50,8 +48,6 @@ class DealContractorMapperTest {
         dto.setCreateUserId("user_2");
         dto.setCreateDate(LocalDateTime.now());
 
-        // ... если есть вложенные объекты, заполни их аналогично
-
         DealContractor entity = mapper.toEntity(dto);
 
         assertThat(entity).isNotNull();
@@ -61,4 +57,5 @@ class DealContractorMapperTest {
         assertThat(entity.getInn()).isEqualTo(dto.getInn());
         assertThat(entity.getCreateUserId()).isEqualTo(dto.getCreateUserId());
     }
+
 }

@@ -53,7 +53,6 @@ class DealContractorServiceTest {
         verify(dealContractorRepository, never()).save(any());
     }
 
-    // ---------- DELETE (logical) ----------
     @Test
     void deleteDealContractor_setsInactive() {
         DealContractor dc = new DealContractor();
@@ -70,8 +69,6 @@ class DealContractorServiceTest {
 
         verify(dealContractorRepository).save(dc);
     }
-
-    // ---------- DELETE: not found ----------
     @Test
     void deleteDealContractor_notFound_throws() {
         when(dealContractorRepository.findById(DC_ID)).thenReturn(Optional.empty());

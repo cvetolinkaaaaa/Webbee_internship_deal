@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * Клиент для взаимодействия с внешним сервисом контрагентов.
+ */
 @Component
 public class ContractorClient {
 
@@ -17,6 +20,9 @@ public class ContractorClient {
         this.contractorServiceUrl = contractorServiceUrl;
     }
 
+    /**
+     * Получает контрагента по его id.
+     */
     public ContractorDto getContractor(String contractorId) {
         String url = contractorServiceUrl + "/contractor/" + contractorId;
         ContractorDto contractor = restTemplate.getForObject(url, ContractorDto.class);

@@ -67,7 +67,6 @@ class DealServiceTest {
         savedDto.setDescription("Test");
         savedDto.setAgreementNumber("A-1");
 
-        // mock mapstruct
         when(dealMapper.toEntity(dto)).thenReturn(entity);
         when(dealStatusRepository.findById("DRAFT")).thenReturn(Optional.of(draftStatus));
         when(dealRepository.save(entity)).thenReturn(savedEntity);
@@ -97,7 +96,7 @@ class DealServiceTest {
 
         DealDto dto = new DealDto();
         dto.setId(id);
-        dto.setStatus(null); // потом проставим
+        dto.setStatus(null);
 
         when(dealRepository.findById(id)).thenReturn(Optional.of(entity));
         when(dealStatusRepository.findById("ACTIVE")).thenReturn(Optional.of(status));

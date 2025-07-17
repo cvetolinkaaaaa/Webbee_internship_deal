@@ -15,6 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
+/**
+ * Сервис для управления связями между контрагентами и их ролями в рамках сделки.
+ */
 @Service
 public class ContractorToRoleService {
 
@@ -30,6 +33,9 @@ public class ContractorToRoleService {
         this.contractorToRoleMapper = contractorToRoleMapper;
     }
 
+    /**
+     * Добавляет роль контрагенту сделки.
+     */
     @Transactional
     public ContractorToRoleDto addRoleToDealContractor(UUID dealContractorId, String roleId) {
         DealContractor dealContractor = dealContractorRepository.findById(dealContractorId)
@@ -48,6 +54,9 @@ public class ContractorToRoleService {
         return contractorToRoleMapper.toDto(saved);
     }
 
+    /**
+     * Удаляет связь между контрагентом и ролью (устанавливает isActive=false).
+     */
     @Transactional
     public void deleteContractorToRole(UUID contractorId, String roleId) {
         ContractorToRoleId id = new ContractorToRoleId(contractorId, roleId);

@@ -7,13 +7,17 @@ import java.util.UUID;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * DTO для основной информации о сделке.
  */
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class DealDto {
 
     /**
@@ -100,117 +104,5 @@ public class DealDto {
     @Schema(description = "Признак активности сделки", example = "true")
     @JsonProperty("isActive")
     private Boolean isActive;
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Boolean active) {
-        isActive = active;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getAgreementNumber() {
-        return agreementNumber;
-    }
-
-    public void setAgreementNumber(String agreementNumber) {
-        this.agreementNumber = agreementNumber;
-    }
-
-    public LocalDate getAgreementDate() {
-        return agreementDate;
-    }
-
-    public void setAgreementDate(LocalDate agreementDate) {
-        this.agreementDate = agreementDate;
-    }
-
-    public LocalDateTime getAgreementStartDt() {
-        return agreementStartDt;
-    }
-
-    public void setAgreementStartDt(LocalDateTime agreementStartDt) {
-        this.agreementStartDt = agreementStartDt;
-    }
-
-    public LocalDate getAvailabilityDate() {
-        return availabilityDate;
-    }
-
-    public void setAvailabilityDate(LocalDate availabilityDate) {
-        this.availabilityDate = availabilityDate;
-    }
-
-    public DealTypeDto getType() {
-        return type;
-    }
-
-    public void setType(DealTypeDto type) {
-        this.type = type;
-    }
-
-    public DealStatusDto getStatus() {
-        return status;
-    }
-
-    public void setStatus(DealStatusDto status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getCloseDt() {
-        return closeDt;
-    }
-
-    public void setCloseDt(LocalDateTime closeDt) {
-        this.closeDt = closeDt;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public LocalDateTime getModifyDate() {
-        return modifyDate;
-    }
-
-    public void setModifyDate(LocalDateTime modifyDate) {
-        this.modifyDate = modifyDate;
-    }
-
-    public String getCreateUserId() {
-        return createUserId;
-    }
-
-    public void setCreateUserId(String createUserId) {
-        this.createUserId = createUserId;
-    }
-
-    public String getModifyUserId() {
-        return modifyUserId;
-    }
-
-    public void setModifyUserId(String modifyUserId) {
-        this.modifyUserId = modifyUserId;
-    }
 
 }

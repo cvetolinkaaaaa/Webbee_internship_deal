@@ -5,7 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Сущность, описывающая статус сделки.
@@ -14,6 +16,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "deal_status")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class DealStatus {
 
     /**
@@ -32,29 +36,5 @@ public class DealStatus {
      */
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Boolean active) {
-        isActive = active;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
 }

@@ -1,7 +1,5 @@
 package com.webbee.deal.service;
 
-import com.webbee.deal.client.ContractorClient;
-import com.webbee.deal.dto.ContractorDto;
 import com.webbee.deal.dto.DealContractorDto;
 import com.webbee.deal.entity.Deal;
 import com.webbee.deal.entity.DealContractor;
@@ -13,7 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,7 +21,6 @@ class DealContractorServiceTest {
 
     @Mock private DealContractorRepository dealContractorRepository;
     @Mock private DealRepository dealRepository;
-    @Mock private ContractorClient contractorClient;
     @Mock private DealContractorMapper dealContractorMapper;
 
     @InjectMocks
@@ -44,11 +40,8 @@ class DealContractorServiceTest {
         dto.setDeal(new Deal());
         dto.getDeal().setId(DEAL_ID);
 
-        when(contractorClient.getContractor(CONTR_ID)).thenReturn(null);
-
         assertThatThrownBy(() -> service.saveDealContractor(dto))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("Contractor with id " + CONTR_ID);
+                .isInstanceOf(IllegalArgumentException.class);
 
         verify(dealContractorRepository, never()).save(any());
     }

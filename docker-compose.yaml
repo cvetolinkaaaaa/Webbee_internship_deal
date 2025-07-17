@@ -3,9 +3,9 @@ version: '3.8'
 services:
   postgres:
     image: postgres:16
-    container_name: contractor-postgres
+    container_name: deal-postgres
     environment:
-      POSTGRES_DB: contractor
+      POSTGRES_DB: deal
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
@@ -14,9 +14,9 @@ services:
 
   contractor-app:
     build: .
-    container_name: contractor-app
+    container_name: deal-app
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/contractor
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/deal
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
     depends_on:

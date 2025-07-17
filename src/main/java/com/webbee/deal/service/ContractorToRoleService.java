@@ -26,7 +26,12 @@ public class ContractorToRoleService {
     private final ContractorToRoleRepository contractorToRoleRepository;
     private final ContractorToRoleMapper contractorToRoleMapper;
 
-    public ContractorToRoleService(DealContractorRepository dealContractorRepository, ContractorRoleRepository contractorRoleRepository, ContractorToRoleRepository contractorToRoleRepository, ContractorToRoleMapper contractorToRoleMapper) {
+    public ContractorToRoleService(
+            DealContractorRepository dealContractorRepository,
+            ContractorRoleRepository contractorRoleRepository,
+            ContractorToRoleRepository contractorToRoleRepository,
+            ContractorToRoleMapper contractorToRoleMapper
+    ) {
         this.dealContractorRepository = dealContractorRepository;
         this.contractorRoleRepository = contractorRoleRepository;
         this.contractorToRoleRepository = contractorToRoleRepository;

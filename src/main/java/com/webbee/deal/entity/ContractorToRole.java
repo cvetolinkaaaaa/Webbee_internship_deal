@@ -9,7 +9,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Сущность, отражающая связь между контрагентом и его ролью.
@@ -18,6 +20,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "contractor_to_role")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class ContractorToRole {
 
     /**
@@ -44,37 +48,5 @@ public class ContractorToRole {
      */
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Boolean active) {
-        isActive = active;
-    }
-
-    public ContractorToRoleId getId() {
-        return id;
-    }
-
-    public void setId(ContractorToRoleId id) {
-        this.id = id;
-    }
-
-    public DealContractor getDealContractor() {
-        return dealContractor;
-    }
-
-    public void setDealContractor(DealContractor dealContractor) {
-        this.dealContractor = dealContractor;
-    }
-
-    public ContractorRole getRole() {
-        return role;
-    }
-
-    public void setRole(ContractorRole role) {
-        this.role = role;
-    }
 
 }

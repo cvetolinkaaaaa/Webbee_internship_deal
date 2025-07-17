@@ -13,7 +13,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Сущность "Сделка".
@@ -22,6 +24,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "deal")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class Deal {
 
     /**
@@ -97,117 +101,5 @@ public class Deal {
      */
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Boolean active) {
-        isActive = active;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public DealStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(DealStatus status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getCreateUserId() {
-        return createUserId;
-    }
-
-    public void setCreateUserId(String createUserId) {
-        this.createUserId = createUserId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getAgreementNumber() {
-        return agreementNumber;
-    }
-
-    public void setAgreementNumber(String agreementNumber) {
-        this.agreementNumber = agreementNumber;
-    }
-
-    public LocalDate getAgreementDate() {
-        return agreementDate;
-    }
-
-    public void setAgreementDate(LocalDate agreementDate) {
-        this.agreementDate = agreementDate;
-    }
-
-    public LocalDateTime getAgreementStartDt() {
-        return agreementStartDt;
-    }
-
-    public void setAgreementStartDt(LocalDateTime agreementStartDt) {
-        this.agreementStartDt = agreementStartDt;
-    }
-
-    public LocalDate getAvailabilityDate() {
-        return availabilityDate;
-    }
-
-    public void setAvailabilityDate(LocalDate availabilityDate) {
-        this.availabilityDate = availabilityDate;
-    }
-
-    public DealType getType() {
-        return type;
-    }
-
-    public void setType(DealType type) {
-        this.type = type;
-    }
-
-    public LocalDateTime getCloseDt() {
-        return closeDt;
-    }
-
-    public void setCloseDt(LocalDateTime closeDt) {
-        this.closeDt = closeDt;
-    }
-
-    public LocalDateTime getModifyDate() {
-        return modifyDate;
-    }
-
-    public void setModifyDate(LocalDateTime modifyDate) {
-        this.modifyDate = modifyDate;
-    }
-
-    public String getModifyUserId() {
-        return modifyUserId;
-    }
-
-    public void setModifyUserId(String modifyUserId) {
-        this.modifyUserId = modifyUserId;
-    }
 
 }

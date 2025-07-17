@@ -2,8 +2,8 @@ FROM eclipse-temurin:23
 
 WORKDIR /app
 
-COPY target/contractor-*.jar app.jar
+COPY target/deal-*.jar app.jar
 
-EXPOSE 8080
+EXPOSE 8081
 
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]

@@ -12,7 +12,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Сущность, описывающая сумму сделки.
@@ -21,6 +23,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "deal_sum")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class DealSum {
 
     /**
@@ -56,53 +60,5 @@ public class DealSum {
      */
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Boolean active) {
-        isActive = active;
-    }
-
-    public Boolean getIsMain() {
-        return isMain;
-    }
-
-    public void setIsMain(Boolean main) {
-        isMain = main;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Deal getDeal() {
-        return deal;
-    }
-
-    public void setDeal(Deal deal) {
-        this.deal = deal;
-    }
-
-    public BigDecimal getValue() {
-        return value;
-    }
-
-    public void setValue(BigDecimal value) {
-        this.value = value;
-    }
-
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
-    }
 
 }

@@ -5,13 +5,17 @@ import java.util.UUID;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Запрос на смену статуса сделки.
  */
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class DealStatusChangeRequest {
 
     /**
@@ -26,21 +30,5 @@ public class DealStatusChangeRequest {
     @Schema(description = "ID нового статуса сделки")
     @JsonProperty("statusId")
     private String statusId;
-
-    public UUID getDealId() {
-        return dealId;
-    }
-
-    public void setDealId(UUID dealId) {
-        this.dealId = dealId;
-    }
-
-    public String getStatusId() {
-        return statusId;
-    }
-
-    public void setStatusId(String statusId) {
-        this.statusId = statusId;
-    }
 
 }

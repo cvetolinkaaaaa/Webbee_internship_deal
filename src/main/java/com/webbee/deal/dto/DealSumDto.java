@@ -5,13 +5,17 @@ import java.math.BigDecimal;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * DTO для представления суммы сделки.
  */
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class DealSumDto {
 
     /**
@@ -44,45 +48,5 @@ public class DealSumDto {
     @Schema(description = "Признак активности записи", example = "true")
     @JsonProperty("isActive")
     private Boolean isActive;
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Boolean active) {
-        isActive = active;
-    }
-
-    public Boolean getIsMain() {
-        return isMain;
-    }
-
-    public void setIsMain(Boolean main) {
-        isMain = main;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public BigDecimal getValue() {
-        return value;
-    }
-
-    public void setValue(BigDecimal value) {
-        this.value = value;
-    }
-
-    public CurrencyDto getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(CurrencyDto currency) {
-        this.currency = currency;
-    }
 
 }

@@ -1,18 +1,26 @@
 package com.webbee.deal.repository;
 
 import com.webbee.deal.dto.DealSearchRequest;
+import com.webbee.deal.entity.ContractorToRole;
 import com.webbee.deal.entity.Deal;
+import com.webbee.deal.entity.DealContractor;
+import com.webbee.deal.entity.DealSum;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.Subquery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -29,85 +37,110 @@ public class DealCustomRepositoryImpl implements DealCustomRepository {
      */
     @Override
     public Page<Deal> searchDeals(DealSearchRequest filter) {
-        StringBuilder jpql = new StringBuilder("SELECT d FROM Deal d WHERE d.isActive = true");
-        StringBuilder countJpql = new StringBuilder("SELECT count(d) FROM Deal d WHERE d.isActive = true");
-        Map<String, Object> params = new HashMap<>();
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Deal> cq = cb.createQuery(Deal.class);
+        Root<Deal> root = cq.from(Deal.class);
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(cb.isTrue(root.get("isActive")));
         if (filter.getDealId() != null) {
-            jpql.append(" AND d.id = :dealId");
-            countJpql.append(" AND d.id = :dealId");
-            params.put("dealId", filter.getDealId());
+            predicates.add(cb.equal(root.get("id"), filter.getDealId()));
         }
-        if (filter.getDescription() != null) {
-            jpql.append(" AND d.description = :desc");
-            countJpql.append(" AND d.description = :desc");
-            params.put("desc", filter.getDescription());
+        if (filter.getDescription() != null && !filter.getDescription().isEmpty()) {
+            predicates.add(cb.equal(root.get("description"), filter.getDescription()));
         }
-        if (filter.getAgreementNumber() != null) {
-            jpql.append(" AND d.agreementNumber LIKE :agrNum");
-            countJpql.append(" AND d.agreementNumber LIKE :agrNum");
-            params.put("agrNum", "%" + filter.getAgreementNumber() + "%");
+        if (filter.getAgreementNumber() != null && !filter.getAgreementNumber().isEmpty()) {
+            predicates.add(cb.like(root.get("agreementNumber"), "%" + filter.getAgreementNumber() + "%"));
         }
         if (filter.getAgreementDateFrom() != null) {
-            jpql.append(" AND d.agreementDate >= :agreementDateFrom");
-            countJpql.append(" AND d.agreementDate >= :agreementDateFrom");
-            params.put("agreementDateFrom", filter.getAgreementDateFrom());
+            predicates.add(cb.greaterThanOrEqualTo(root.get("agreementDate"), filter.getAgreementDateFrom()));
         }
         if (filter.getAgreementDateTo() != null) {
-            jpql.append(" AND d.agreementDate <= :agreementDateTo");
-            countJpql.append(" AND d.agreementDate <= :agreementDateTo");
-            params.put("agreementDateTo", filter.getAgreementDateTo());
+            predicates.add(cb.lessThanOrEqualTo(root.get("agreementDate"), filter.getAgreementDateTo()));
+        }
+        if (filter.getAvailabilityDateFrom() != null) {
+            predicates.add(cb.greaterThanOrEqualTo(root.get("availabilityDate"), filter.getAvailabilityDateFrom()));
+        }
+        if (filter.getAvailabilityDateTo() != null) {
+            predicates.add(cb.lessThanOrEqualTo(root.get("availabilityDate"), filter.getAvailabilityDateTo()));
         }
         if (filter.getTypeIds() != null && !filter.getTypeIds().isEmpty()) {
-            jpql.append(" AND d.type.id IN :typeIds");
-            countJpql.append(" AND d.type.id IN :typeIds");
-            params.put("typeIds", filter.getTypeIds());
+            predicates.add(root.get("type").get("id").in(filter.getTypeIds()));
         }
         if (filter.getStatusIds() != null && !filter.getStatusIds().isEmpty()) {
-            jpql.append(" AND d.status.id IN :statusIds");
-            countJpql.append(" AND d.status.id IN :statusIds");
-            params.put("statusIds", filter.getStatusIds());
+            predicates.add(root.get("status").get("id").in(filter.getStatusIds()));
+        }
+        if (filter.getCloseDtFrom() != null) {
+            predicates.add(cb.greaterThanOrEqualTo(root.get("closeDt"), filter.getCloseDtFrom().atStartOfDay()));
+        }
+        if (filter.getCloseDtTo() != null) {
+            predicates.add(cb.lessThanOrEqualTo(root.get("closeDt"), filter.getCloseDtTo().atTime(23, 59, 59)));
         }
         if (filter.getSumValue() != null || filter.getSumCurrency() != null) {
-            jpql.append(" AND EXISTS (SELECT s FROM DealSum s WHERE s.deal = d");
-            countJpql.append(" AND EXISTS (SELECT s FROM DealSum s WHERE s.deal = d");
+            Subquery<Long> subquery = cq.subquery(Long.class);
+            Root<DealSum> sumRoot = subquery.from(DealSum.class);
+            subquery.select(sumRoot.get("id"));
+            List<Predicate> sumPredicates = new ArrayList<>();
+            sumPredicates.add(cb.equal(sumRoot.get("deal"), root));
             if (filter.getSumValue() != null) {
-                jpql.append(" AND s.value = :sumVal");
-                countJpql.append(" AND s.value = :sumVal");
-                params.put("sumVal", filter.getSumValue());
+                sumPredicates.add(cb.equal(sumRoot.get("value"), new java.math.BigDecimal(filter.getSumValue())));
             }
             if (filter.getSumCurrency() != null) {
-                jpql.append(" AND s.currency.id = :sumCur");
-                countJpql.append(" AND s.currency.id = :sumCur");
-                params.put("sumCur", filter.getSumCurrency());
+                sumPredicates.add(cb.equal(sumRoot.get("currency").get("id"), filter.getSumCurrency()));
             }
-            jpql.append(")");
-            countJpql.append(")");
+            subquery.where(sumPredicates.toArray(new Predicate[0]));
+            predicates.add(cb.exists(subquery));
         }
-        if (filter.getBorrowerSearch() != null) {
-            jpql.append(" AND EXISTS (SELECT dc FROM DealContractor dc JOIN ContractorToRole ctr ON ctr.dealContractor = dc WHERE dc.deal = d AND ctr.role.id = 'BORROWER' AND ctr.isActive = true AND (");
-            countJpql.append(" AND EXISTS (SELECT dc FROM DealContractor dc JOIN ContractorToRole ctr ON ctr.dealContractor = dc WHERE dc.deal = d AND ctr.role.id = 'BORROWER' AND ctr.isActive = true AND (");
-            jpql.append("dc.contractorId LIKE :borrower OR dc.name LIKE :borrower OR dc.inn LIKE :borrower))");
-            countJpql.append("dc.contractorId LIKE :borrower OR dc.name LIKE :borrower OR dc.inn LIKE :borrower))");
-            params.put("borrower", "%" + filter.getBorrowerSearch() + "%");
+        if (filter.getBorrowerSearch() != null && !filter.getBorrowerSearch().isEmpty()) {
+            Subquery<Long> borrowerSub = cq.subquery(Long.class);
+            Root<DealContractor> dcRoot = borrowerSub.from(DealContractor.class);
+            Join<DealContractor, ContractorToRole> ctrJoin = dcRoot.join("contractorToRoles");
+            borrowerSub.select(dcRoot.get("id"));
+            List<Predicate> subPreds = new ArrayList<>();
+            subPreds.add(cb.equal(dcRoot.get("deal"), root));
+            subPreds.add(cb.equal(ctrJoin.get("role").get("id"), "BORROWER"));
+            subPreds.add(cb.isTrue(ctrJoin.get("isActive")));
+            String pattern = "%" + filter.getBorrowerSearch() + "%";
+            Predicate byContractor = cb.like(dcRoot.get("contractorId"), pattern);
+            Predicate byName = cb.like(dcRoot.get("name"), pattern);
+            Predicate byInn = cb.like(dcRoot.get("inn"), pattern);
+            subPreds.add(cb.or(byContractor, byName, byInn));
+            borrowerSub.where(subPreds.toArray(new Predicate[0]));
+            predicates.add(cb.exists(borrowerSub));
         }
-        if (filter.getWarrantySearch() != null) {
-            jpql.append(" AND EXISTS (SELECT dc FROM DealContractor dc JOIN ContractorToRole ctr ON ctr.dealContractor = dc WHERE dc.deal = d AND ctr.role.id = 'WARRANITY' AND ctr.isActive = true AND (");
-            countJpql.append(" AND EXISTS (SELECT dc FROM DealContractor dc JOIN ContractorToRole ctr ON ctr.dealContractor = dc WHERE dc.deal = d AND ctr.role.id = 'WARRANITY' AND ctr.isActive = true AND (");
-            jpql.append("dc.contractorId LIKE :warr OR dc.name LIKE :warr OR dc.inn LIKE :warr))");
-            countJpql.append("dc.contractorId LIKE :warr OR dc.name LIKE :warr OR dc.inn LIKE :warr))");
-            params.put("warr", "%" + filter.getWarrantySearch() + "%");
+        if (filter.getWarrantySearch() != null && !filter.getWarrantySearch().isEmpty()) {
+            Subquery<Long> warrantySub = cq.subquery(Long.class);
+            Root<DealContractor> dcRoot = warrantySub.from(DealContractor.class);
+            Join<DealContractor, ContractorToRole> ctrJoin = dcRoot.join("contractorToRoles");
+            warrantySub.select(dcRoot.get("id"));
+            List<Predicate> subPreds = new ArrayList<>();
+            subPreds.add(cb.equal(dcRoot.get("deal"), root));
+            subPreds.add(cb.equal(ctrJoin.get("role").get("id"), "WARRANITY"));
+            subPreds.add(cb.isTrue(ctrJoin.get("isActive")));
+            String pattern = "%" + filter.getWarrantySearch() + "%";
+            Predicate byContractor = cb.like(dcRoot.get("contractorId"), pattern);
+            Predicate byName = cb.like(dcRoot.get("name"), pattern);
+            Predicate byInn = cb.like(dcRoot.get("inn"), pattern);
+            subPreds.add(cb.or(byContractor, byName, byInn));
+            warrantySub.where(subPreds.toArray(new Predicate[0]));
+            predicates.add(cb.exists(warrantySub));
         }
+        cq.where(predicates.toArray(new Predicate[0]));
         String sortField = filter.getSortField() != null ? filter.getSortField() : "agreementDate";
         String sortDir = filter.getSortDir() != null ? filter.getSortDir() : "DESC";
-        jpql.append(" ORDER BY d." + sortField + " " + sortDir);
-        TypedQuery<Deal> query = entityManager.createQuery(jpql.toString(), Deal.class);
-        params.forEach(query::setParameter);
+        if ("DESC".equalsIgnoreCase(sortDir)) {
+            cq.orderBy(cb.desc(root.get(sortField)));
+        } else {
+            cq.orderBy(cb.asc(root.get(sortField)));
+        }
+        TypedQuery<Deal> query = entityManager.createQuery(cq);
         query.setFirstResult(filter.getPage() * filter.getSize());
         query.setMaxResults(filter.getSize());
         List<Deal> deals = query.getResultList();
-        TypedQuery<Long> countQuery = entityManager.createQuery(countJpql.toString(), Long.class);
-        params.forEach(countQuery::setParameter);
-        Long total = countQuery.getSingleResult();
+        CriteriaQuery<Long> countCq = cb.createQuery(Long.class);
+        Root<Deal> countRoot = countCq.from(Deal.class);
+        List<Predicate> countPredicates = new ArrayList<>(predicates);
+        countCq.select(cb.count(countRoot)).where(countPredicates.toArray(new Predicate[0]));
+        Long total = entityManager.createQuery(countCq).getSingleResult();
         return new PageImpl<>(deals, PageRequest.of(filter.getPage(), filter.getSize()), total);
     }
 

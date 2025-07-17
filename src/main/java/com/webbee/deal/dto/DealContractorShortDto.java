@@ -5,13 +5,17 @@ import java.util.UUID;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Краткое описание контрагента сделки.
  */
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
 public class DealContractorShortDto {
 
     /**
@@ -39,45 +43,5 @@ public class DealContractorShortDto {
      */
     @Schema(description = "Список ролей контрагента в сделке")
     private List<ContractorRoleShortDto> roles;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getContractorId() {
-        return contractorId;
-    }
-
-    public void setContractorId(String contractorId) {
-        this.contractorId = contractorId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Boolean getMain() {
-        return main;
-    }
-
-    public void setMain(Boolean main) {
-        this.main = main;
-    }
-
-    public List<ContractorRoleShortDto> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<ContractorRoleShortDto> roles) {
-        this.roles = roles;
-    }
 
 }

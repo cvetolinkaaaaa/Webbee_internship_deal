@@ -5,11 +5,15 @@ import java.util.UUID;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * DTO, представляющий составной идентификатор связи между контрагентом и ролью.
  */
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContractorToRoleIdDto {
@@ -32,21 +36,5 @@ public class ContractorToRoleIdDto {
             example = "BORROWER"
     )
     private String roleId;
-
-    public UUID getContractorId() {
-        return contractorId;
-    }
-
-    public void setContractorId(UUID contractorId) {
-        this.contractorId = contractorId;
-    }
-
-    public String getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
-    }
 
 }

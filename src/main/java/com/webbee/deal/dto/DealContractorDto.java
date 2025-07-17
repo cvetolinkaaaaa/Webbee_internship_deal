@@ -7,13 +7,17 @@ import java.util.UUID;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * DTO для связи между сделкой и контрагентом.
  */
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class DealContractorDto {
 
     /**
@@ -82,93 +86,5 @@ public class DealContractorDto {
     @JsonProperty("isActive")
     @Schema(description = "Признак активности", example = "true")
     private Boolean isActive;
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Boolean active) {
-        isActive = active;
-    }
-
-    public Boolean getIsMain() {
-        return isMain;
-    }
-
-    public void setIsMain(Boolean main) {
-        this.isMain = isMain;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public Deal getDeal() {
-        return deal;
-    }
-
-    public void setDeal(Deal deal) {
-        this.deal = deal;
-    }
-
-    public String getContractorId() {
-        return contractorId;
-    }
-
-    public void setContractorId(String contractorId) {
-        this.contractorId = contractorId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getInn() {
-        return inn;
-    }
-
-    public void setInn(String inn) {
-        this.inn = inn;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public LocalDateTime getModifyDate() {
-        return modifyDate;
-    }
-
-    public void setModifyDate(LocalDateTime modifyDate) {
-        this.modifyDate = modifyDate;
-    }
-
-    public String getCreateUserId() {
-        return createUserId;
-    }
-
-    public void setCreateUserId(String createUserId) {
-        this.createUserId = createUserId;
-    }
-
-    public String getModifyUserId() {
-        return modifyUserId;
-    }
-
-    public void setModifyUserId(String modifyUserId) {
-        this.modifyUserId = modifyUserId;
-    }
 
 }

@@ -34,7 +34,12 @@ public class DealDetailsService {
     private final DealContractorRepository dealContractorRepository;
     private final ContractorToRoleRepository contractorToRoleRepository;
 
-    public DealDetailsService(DealRepository dealRepository, DealSumRepository dealSumRepository, DealContractorRepository dealContractorRepository, ContractorToRoleRepository contractorToRoleRepository) {
+    public DealDetailsService(
+            DealRepository dealRepository,
+            DealSumRepository dealSumRepository,
+            DealContractorRepository dealContractorRepository,
+            ContractorToRoleRepository contractorToRoleRepository
+    ) {
         this.dealRepository = dealRepository;
         this.dealSumRepository = dealSumRepository;
         this.dealContractorRepository = dealContractorRepository;

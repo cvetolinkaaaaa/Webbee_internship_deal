@@ -46,8 +46,6 @@ public class DealRepositoryTest {
     @Test
     void whenSave_thenFindByIdReturnsDeal() {
         Deal deal = new Deal();
-        // set поля у deal, например:
-        // deal.setName("Test deal");
         dealRepository.save(deal);
 
         Optional<Deal> found = dealRepository.findById(deal.getId());

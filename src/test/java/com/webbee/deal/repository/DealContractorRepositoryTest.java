@@ -20,7 +20,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -62,12 +61,10 @@ public class DealContractorRepositoryTest {
         dealRepository.deleteAll();
         dealTypeRepository.deleteAll();
 
-        // Сначала сохраняем тип сделки
         DealType dealType = new DealType();
         dealType.setId("TYPE1");
         dealType.setName("Test Type");
         dealType.setIsActive(true);
-// Обязательно сохраняем объект и используем результат:
         dealType = dealTypeRepository.save(dealType);
 
         DealStatus status = new DealStatus();
@@ -75,9 +72,6 @@ public class DealContractorRepositoryTest {
         status.setName("Новый");
         status = dealStatusRepository.save(status);
 
-
-
-        // Затем сохраняем саму сделку с этим типом
         testDeal = new Deal();
         testDeal.setType(dealType);
         testDeal.setStatus(status);
@@ -106,7 +100,6 @@ public class DealContractorRepositoryTest {
 
     @Test
     void testFindByDealIdAndIsActiveTrue_FiltersCorrectly() {
-        // Сохраняем второй тип сделки
         DealType anotherType = new DealType();
         anotherType.setId("TYPE2");
         anotherType.setName("Other Type");
@@ -116,7 +109,6 @@ public class DealContractorRepositoryTest {
         DealStatus status = new DealStatus("NEW", "Новый", true);
         status = dealStatusRepository.save(status);
 
-        // Сохраняем сделку с этим новым типом
         Deal anotherDeal = new Deal();
         anotherDeal.setType(anotherType);
         anotherDeal.setStatus(status);
@@ -125,28 +117,24 @@ public class DealContractorRepositoryTest {
         anotherDeal.setCreateDate(LocalDateTime.now());
         dealRepository.save(anotherDeal);
 
-        // Активный для testDeal
         DealContractor c1 = new DealContractor();
         c1.setDeal(testDeal);
         c1.setContractorId("111");
         c1.setName("Контрагент A");
         c1.setIsActive(true);
 
-        // Неактивный для testDeal
         DealContractor c2 = new DealContractor();
         c2.setDeal(testDeal);
         c2.setContractorId("222");
         c2.setName("Контрагент B");
         c2.setIsActive(false);
 
-        // Еще один активный для testDeal
         DealContractor c3 = new DealContractor();
         c3.setDeal(testDeal);
         c3.setContractorId("333");
         c3.setName("Контрагент C");
         c3.setIsActive(true);
 
-        // Активный контрагент для другой сделки
         DealContractor c4 = new DealContractor();
         c4.setDeal(anotherDeal);
         c4.setContractorId("444");

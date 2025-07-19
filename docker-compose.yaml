@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: deal-postgres
+    environment:
+      POSTGRES_DB: deal
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    restart: unless-stopped
+
+  contractor-app:
+    build: .
+    container_name: deal-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/deal
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    depends_on:
+      - postgres
+    ports:
+      - "8081:8080"
+    restart: unless-stopped

@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -49,9 +50,9 @@ public class DealController {
     )
     @ApiResponse(responseCode = "201", description = "Сделка успешно создана")
     @PutMapping("/save")
-    public ResponseEntity<DealDto> saveDeal(@RequestBody DealDto dto) {
-        DealDto saved = dealService.saveDeal(dto);
-        return ResponseEntity.ok(saved);
+    public ResponseEntity saveDeal(@RequestBody DealDto dto) {
+        dealService.saveDeal(dto);
+        return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
     /**

@@ -17,7 +17,9 @@ import com.webbee.deal.repository.ContractorToRoleRepository;
 import com.webbee.deal.repository.DealContractorRepository;
 import com.webbee.deal.repository.DealRepository;
 import com.webbee.deal.repository.DealSumRepository;
+import com.webbee.deal.security.service.AuthorizationService;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,24 +29,14 @@ import java.util.UUID;
  * Сервис получения детализированной информации о сделке.
  */
 @Service
+@RequiredArgsConstructor
 public class DealDetailsService {
 
     private final DealRepository dealRepository;
     private final DealSumRepository dealSumRepository;
     private final DealContractorRepository dealContractorRepository;
     private final ContractorToRoleRepository contractorToRoleRepository;
-
-    public DealDetailsService(
-            DealRepository dealRepository,
-            DealSumRepository dealSumRepository,
-            DealContractorRepository dealContractorRepository,
-            ContractorToRoleRepository contractorToRoleRepository
-    ) {
-        this.dealRepository = dealRepository;
-        this.dealSumRepository = dealSumRepository;
-        this.dealContractorRepository = dealContractorRepository;
-        this.contractorToRoleRepository = contractorToRoleRepository;
-    }
+    private final AuthorizationService authorizationService;
 
     /**
      * Возвращает подробную информацию по сделке.
@@ -99,6 +91,20 @@ public class DealDetailsService {
             })
             .toList();
         dto.setContractors(contractorDtos);
+        return dto;
+    }
+
+    /**
+     * Возвращает подробную информацию по сделке с учетом прав доступа пользователя.
+     */
+    public DealDetailsDto getDealDetailsWithAuth(UUID dealId) {
+
+        DealDetailsDto dto = getDealDetails(dealId);
+
+        String dealTypeId = dto.getType() != null ? dto.getType().getId() : null;
+        if (!authorizationService.canAccessDeal(dealTypeId)) {
+            throw new SecurityException("Access denied for deal type: " + dealTypeId);
+        }
         return dto;
     }
 

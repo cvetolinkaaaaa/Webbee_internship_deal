@@ -43,7 +43,7 @@ public class UiDealContractorController {
             @ApiResponse(responseCode = "201", description = "Связь успешно создана или обновлена"),
             @ApiResponse(responseCode = "400", description = "Некорректные данные запроса")})
     @PutMapping("/save")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('DEAL_SUPERUSER') or hasRole('SUPERUSER')")
     public ResponseEntity saveDealContractor(@RequestBody DealContractorDto dto) {
 
         dealContractorService.saveDealContractor(dto);
@@ -60,7 +60,7 @@ public class UiDealContractorController {
     )
     @ApiResponse(responseCode = "204", description = "Связь успешно удалена")
     @DeleteMapping("/delete")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('DEAL_SUPERUSER') or hasRole('SUPERUSER')")
     public ResponseEntity deleteDealContractor(
             @RequestParam("id") UUID dealContractorId
     ) {

@@ -40,7 +40,7 @@ public class UiContractorToRoleController {
     )
     @ApiResponse(responseCode = "200", description = "Связь успешно создана")
     @PostMapping("/add")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('DEAL_SUPERUSER') or hasRole('SUPERUSER')")
     public ResponseEntity<ContractorToRoleDto> addContractorRole(
             @RequestBody ContractorToRoleDto contractorToRoleDto
     ) {
@@ -64,7 +64,7 @@ public class UiContractorToRoleController {
     )
     @ApiResponse(responseCode = "204", description = "Связь успешно удалена")
     @DeleteMapping("/delete")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('DEAL_SUPERUSER') or hasRole('SUPERUSER')")
     public ResponseEntity<Void> deleteContractorToRole(
             @RequestParam("contractorId") UUID contractorId,
             @RequestParam("roleId") String roleId

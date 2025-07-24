@@ -94,18 +94,4 @@ public class DealDetailsService {
         return dto;
     }
 
-    /**
-     * Возвращает подробную информацию по сделке с учетом прав доступа пользователя.
-     */
-    public DealDetailsDto getDealDetailsWithAuth(UUID dealId) {
-
-        DealDetailsDto dto = getDealDetails(dealId);
-
-        String dealTypeId = dto.getType() != null ? dto.getType().getId() : null;
-        if (!authorizationService.canAccessDeal(dealTypeId)) {
-            throw new SecurityException("Access denied for deal type: " + dealTypeId);
-        }
-        return dto;
-    }
-
 }

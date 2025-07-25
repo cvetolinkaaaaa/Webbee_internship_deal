@@ -11,6 +11,7 @@ import lombok.Setter;
 
 /**
  * DTO, представляющий составной идентификатор связи между контрагентом и ролью.
+ * @author Evseeva Tsvetolina
  */
 @Getter
 @Setter

@@ -17,7 +17,9 @@ import com.webbee.deal.repository.ContractorToRoleRepository;
 import com.webbee.deal.repository.DealContractorRepository;
 import com.webbee.deal.repository.DealRepository;
 import com.webbee.deal.repository.DealSumRepository;
+import com.webbee.deal.security.service.AuthorizationService;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,26 +27,17 @@ import java.util.UUID;
 
 /**
  * Сервис получения детализированной информации о сделке.
+ * @author Evseeva Tsvetolina
  */
 @Service
+@RequiredArgsConstructor
 public class DealDetailsService {
 
     private final DealRepository dealRepository;
     private final DealSumRepository dealSumRepository;
     private final DealContractorRepository dealContractorRepository;
     private final ContractorToRoleRepository contractorToRoleRepository;
-
-    public DealDetailsService(
-            DealRepository dealRepository,
-            DealSumRepository dealSumRepository,
-            DealContractorRepository dealContractorRepository,
-            ContractorToRoleRepository contractorToRoleRepository
-    ) {
-        this.dealRepository = dealRepository;
-        this.dealSumRepository = dealSumRepository;
-        this.dealContractorRepository = dealContractorRepository;
-        this.contractorToRoleRepository = contractorToRoleRepository;
-    }
+    private final AuthorizationService authorizationService;
 
     /**
      * Возвращает подробную информацию по сделке.

@@ -3,6 +3,7 @@ package com.webbee.deal.service;
 import com.webbee.deal.dto.DealContractorShortDto;
 import com.webbee.deal.dto.DealDetailsDto;
 import com.webbee.deal.dto.DealSearchRequest;
+import com.webbee.deal.security.service.AuthorizationService;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -17,12 +18,14 @@ import java.util.List;
 
 /**
  * Сервис для экспорта данных о сделках в Excel.
+ * @author Evseeva Tsvetolina
  */
 @Service
 @RequiredArgsConstructor
 public class DealExportService {
 
     private final DealService dealService;
+    private final AuthorizationService authorizationService;
 
     /**
      * Экспортирует сделки, удовлетворяющие фильтру, в Excel-файл формата .xlsx.
@@ -86,6 +89,16 @@ public class DealExportService {
         } catch (Exception e) {
             throw new RuntimeException("Ошибка экспорта Excel", e);
         }
+    }
+
+    /**
+     * Экспортирует сделки в Excel с учетом прав доступа пользователя.
+     */
+    public byte[] exportDealsToExcelWithAuth(DealSearchRequest filter) {
+
+        DealSearchRequest filteredRequest = authorizationService.applyDealAccessFilter(filter);
+        return exportDealsToExcel(filteredRequest);
+
     }
 
 }

@@ -8,6 +8,7 @@ import java.util.UUID;
 
 /**
  * Репозиторий для работы со связями между контрагентами и ролями.
+ * @author Evseeva Tsvetolina
  */
 public interface ContractorToRoleRepository extends JpaRepository<ContractorToRole, ContractorToRoleId> {
 

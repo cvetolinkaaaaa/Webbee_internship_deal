@@ -19,6 +19,7 @@ import java.util.UUID;
 
 /**
  * Контроллер для управления связями между сделками и контрагентами.
+ * @author Evseeva Tsvetolina
  */
 @RestController
 @RequestMapping("/deal-contractor")

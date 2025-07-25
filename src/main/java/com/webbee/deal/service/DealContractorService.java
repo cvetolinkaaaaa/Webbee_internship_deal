@@ -14,6 +14,7 @@ import java.util.UUID;
 
 /**
  * Сервис для управления контрагентами сделки.
+ * @author Evseeva Tsvetolina
  */
 @Service
 public class DealContractorService {

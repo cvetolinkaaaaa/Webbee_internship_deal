@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 
 /**
  * Маппер для преобразования между сущностью DealSum и DTO DealSumDto.
+ * @author Evseeva Tsvetolina
  */
 @Mapper(componentModel = "spring", uses = {CurrencyMapper.class})
 public interface DealSumMapper {

@@ -11,6 +11,7 @@ import lombok.Setter;
 
 /**
  * DTO для представления суммы сделки.
+ * @author Evseeva Tsvetolina
  */
 @NoArgsConstructor
 @AllArgsConstructor

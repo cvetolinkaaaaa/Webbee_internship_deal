@@ -8,6 +8,7 @@ import lombok.Setter;
 
 /**
  * Краткая информация о роли контрагента.
+ * @author Evseeva Tsvetolina
  */
 @Getter
 @Setter

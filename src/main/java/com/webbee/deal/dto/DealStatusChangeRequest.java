@@ -11,6 +11,7 @@ import lombok.Setter;
 
 /**
  * Запрос на смену статуса сделки.
+ * @author Evseeva Tsvetolina
  */
 @NoArgsConstructor
 @AllArgsConstructor

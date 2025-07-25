@@ -10,6 +10,7 @@ import lombok.Setter;
 /**
  * DTO, представляющий роль контрагента.
  * Используется для передачи информации о роли между слоями приложения.
+ * @author Evseeva Tsvetolina
  */
 @NoArgsConstructor
 @AllArgsConstructor

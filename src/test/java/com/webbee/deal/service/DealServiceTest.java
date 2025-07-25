@@ -6,6 +6,8 @@ import com.webbee.deal.entity.DealStatus;
 import com.webbee.deal.mapper.DealMapper;
 import com.webbee.deal.repository.DealRepository;
 import com.webbee.deal.repository.DealStatusRepository;
+import com.webbee.deal.security.service.AuthorizationService;
+import com.webbee.deal.utils.UserIdService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -24,7 +26,8 @@ class DealServiceTest {
     private DealRepository dealRepository;
     private DealStatusRepository dealStatusRepository;
     private DealMapper dealMapper;
-
+    private AuthorizationService authorizationService;
+    private UserIdService userIdService;
     private DealService dealService;
 
     @BeforeEach
@@ -36,7 +39,9 @@ class DealServiceTest {
         dealService = new DealService(
                 dealRepository,
                 dealMapper,
-                dealStatusRepository
+                dealStatusRepository,
+                authorizationService,
+                userIdService
         );
     }
 
@@ -62,22 +67,19 @@ class DealServiceTest {
         savedEntity.setAgreementNumber("A-1");
         savedEntity.setStatus(draftStatus);
 
-        DealDto savedDto = new DealDto();
-        savedDto.setId(entity.getId());
-        savedDto.setDescription("Test");
-        savedDto.setAgreementNumber("A-1");
-
         when(dealMapper.toEntity(dto)).thenReturn(entity);
         when(dealStatusRepository.findById("DRAFT")).thenReturn(Optional.of(draftStatus));
         when(dealRepository.save(entity)).thenReturn(savedEntity);
-        when(dealMapper.toDto(savedEntity)).thenReturn(savedDto);
 
-        DealDto result = dealService.saveDeal(dto);
+        dealService.saveDeal(dto);
 
-        assertThat(result.getDescription()).isEqualTo("Test");
         verify(dealStatusRepository).findById("DRAFT");
         verify(dealRepository).save(entity);
-        verify(dealMapper).toDto(savedEntity);
+
+        assertThat(entity.getStatus()).isEqualTo(draftStatus);
+        assertThat(entity.getIsActive()).isTrue();
+        assertThat(entity.getCreateDate()).isNotNull();
+        assertThat(entity.getModifyDate()).isNotNull();
     }
 
 

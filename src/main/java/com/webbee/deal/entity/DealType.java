@@ -11,6 +11,7 @@ import lombok.Setter;
 
 /**
  * Сущность, представляющая тип сделки.
+ * @author Evseeva Tsvetolina
  */
 @Entity
 @Table(name = "deal_type")

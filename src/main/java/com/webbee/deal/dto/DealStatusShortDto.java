@@ -8,6 +8,7 @@ import lombok.Setter;
 
 /**
  * Краткая информация о статусе сделки.
+ * @author Evseeva Tsvetolina
  */
 @NoArgsConstructor
 @AllArgsConstructor

@@ -9,6 +9,7 @@ import org.mapstruct.MappingTarget;
 /**
  * Маппер для преобразования между сущностью DealContractor
  * и DTO DealContractorDto.
+ * @author Evseeva Tsvetolina
  */
 @Mapper(componentModel = "spring", uses = {ContractorToRoleMapper.class})
 public interface DealContractorMapper {

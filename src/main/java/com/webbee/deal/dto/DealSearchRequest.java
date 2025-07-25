@@ -10,6 +10,7 @@ import java.util.UUID;
 
 /**
  * DTO-запрос для поиска сделок по различным параметрам.
+ * @author Evseeva Tsvetolina
  */
 @Getter
 @Setter

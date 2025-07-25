@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 
 /**
  * Маппер для преобразования между сущностью DealStatus и DTO DealStatusDto.
+ * @author Evseeva Tsvetolina
  */
 @Mapper(componentModel = "spring")
 public interface DealStatusMapper {

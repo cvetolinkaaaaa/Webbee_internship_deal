@@ -7,6 +7,7 @@ import org.mapstruct.Mapper;
 /**
  * Маппер для преобразования между сущностью Currency
  * и DTO CurrencyDto.
+ * @author Evseeva Tsvetolina
  */
 @Mapper(componentModel = "spring")
 public interface CurrencyMapper {

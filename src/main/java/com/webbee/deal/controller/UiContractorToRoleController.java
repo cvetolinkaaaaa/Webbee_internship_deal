@@ -21,6 +21,7 @@ import java.util.UUID;
 
 /**
  * UI контроллер для управления связями между контрагентами и ролями (требует авторизации).
+ * @author Evseeva Tsvetolina
  */
 @RestController
 @RequestMapping("/ui/contractor-to-role")

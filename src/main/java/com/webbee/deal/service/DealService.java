@@ -22,6 +22,7 @@ import java.util.UUID;
 
 /**
  * Сервисный класс для управления сделками.
+ * @author Evseeva Tsvetolina
  */
 @Service
 @RequiredArgsConstructor

@@ -17,6 +17,7 @@ import java.util.UUID;
 
 /**
  * Сервис для управления связями между контрагентами и их ролями в рамках сделки.
+ * @author Evseeva Tsvetolina
  */
 @Service
 public class ContractorToRoleService {

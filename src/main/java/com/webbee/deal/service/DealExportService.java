@@ -18,6 +18,7 @@ import java.util.List;
 
 /**
  * Сервис для экспорта данных о сделках в Excel.
+ * @author Evseeva Tsvetolina
  */
 @Service
 @RequiredArgsConstructor

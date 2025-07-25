@@ -18,6 +18,7 @@ import lombok.Setter;
 
 /**
  * Сущность, представляющая связь сделки с контрагентом.
+ * @author Evseeva Tsvetolina
  */
 @Entity
 @Table(name = "deal_contractor")

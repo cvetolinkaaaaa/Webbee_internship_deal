@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 
 /**
  * Маппер для преобразования между сущностью DealType и DTO DealTypeDto.
+ * @author Evseeva Tsvetolina
  */
 @Mapper(componentModel = "spring")
 public interface DealTypeMapper {

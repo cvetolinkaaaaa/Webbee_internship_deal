@@ -30,6 +30,7 @@ import java.util.UUID;
 
 /**
  * Контроллер для управления сделками.
+ * @author Evseeva Tsvetolina
  */
 @RestController
 @RequestMapping("/deal")

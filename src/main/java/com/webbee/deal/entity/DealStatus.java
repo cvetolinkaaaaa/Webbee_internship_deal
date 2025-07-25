@@ -11,6 +11,7 @@ import lombok.Setter;
 
 /**
  * Сущность, описывающая статус сделки.
+ * @author Evseeva Tsvetolina
  */
 @Entity
 @Table(name = "deal_status")

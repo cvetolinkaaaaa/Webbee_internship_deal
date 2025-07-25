@@ -7,6 +7,7 @@ import org.mapstruct.Mapper;
 /**
  * Маппер для преобразования между сущностью ContractorRole
  * и DTO ContractorRoleDto.
+ * @author Evseeva Tsvetolina
  */
 @Mapper(componentModel = "spring")
 public interface ContractorRoleMapper {

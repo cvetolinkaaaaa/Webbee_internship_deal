@@ -41,7 +41,6 @@ public class AuthorizationService {
         return hasAnyRole(userRoles, UserRole.SUPERUSER, UserRole.DEAL_SUPERUSER);
     }
 
-
     /**
      * Проверяет, может ли текущий пользователь просматривать справочную информацию.
      */
@@ -61,7 +60,6 @@ public class AuthorizationService {
         );
 
     }
-
 
     /**
      * Проверяет, запрещен ли доступ к deal сервисам.

@@ -27,6 +27,7 @@ import java.util.UUID;
 
 /**
  * Сервис получения детализированной информации о сделке.
+ * @author Evseeva Tsvetolina
  */
 @Service
 @RequiredArgsConstructor

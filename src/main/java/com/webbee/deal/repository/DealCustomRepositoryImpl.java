@@ -26,6 +26,7 @@ import java.util.UUID;
 
 /**
  * Реализация кастомного репозитория для поиска сделок с фильтрацией по различным параметрам.
+ * @author Evseeva Tsvetolina
  */
 @Repository
 public class DealCustomRepositoryImpl implements DealCustomRepository {

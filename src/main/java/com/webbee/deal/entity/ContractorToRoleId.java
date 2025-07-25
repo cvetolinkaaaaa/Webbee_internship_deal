@@ -11,6 +11,7 @@ import lombok.Setter;
 
 /**
  * Составной идентификатор для связи "Контрагент — Роль".
+ * @author Evseeva Tsvetolina
  */
 @Embeddable
 @NoArgsConstructor

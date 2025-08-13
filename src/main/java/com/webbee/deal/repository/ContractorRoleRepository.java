@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * Репозиторий для работы с ролями контрагентов.
+ * @author Evseeva Tsvetolina
  */
 public interface ContractorRoleRepository extends JpaRepository<ContractorRole, String> {
 

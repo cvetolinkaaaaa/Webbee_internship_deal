@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 
 /**
  * Кастомный репозиторий для расширенного поиска сделок.
+ * @author Evseeva Tsvetolina
  */
 public interface DealCustomRepository {
 

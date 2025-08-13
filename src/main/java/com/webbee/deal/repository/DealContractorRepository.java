@@ -7,6 +7,7 @@ import java.util.UUID;
 
 /**
  * Репозиторий для работы с контрагентами сделки.
+ * @author Evseeva Tsvetolina
  */
 public interface DealContractorRepository extends JpaRepository<DealContractor, UUID> {
 

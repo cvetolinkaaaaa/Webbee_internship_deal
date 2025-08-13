@@ -9,6 +9,7 @@ import org.mapstruct.MappingTarget;
 
 /**
  * Маппер для преобразования между сущностью Deal, DTO DealDto и DealDetailsDto.
+ * @author Evseeva Tsvetolina
  */
 @Mapper(
     componentModel = "spring",

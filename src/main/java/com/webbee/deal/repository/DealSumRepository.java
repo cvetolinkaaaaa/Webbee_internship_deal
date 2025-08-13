@@ -7,6 +7,7 @@ import java.util.UUID;
 
 /**
  * Репозиторий для работы с сущностью DealSum.
+ * @author Evseeva Tsvetolina
  */
 public interface DealSumRepository extends JpaRepository<DealSum, Long> {
 

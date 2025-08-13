@@ -11,6 +11,7 @@ import lombok.Setter;
 
 /**
  * Краткое описание контрагента сделки.
+ * @author Evseeva Tsvetolina
  */
 @NoArgsConstructor
 @AllArgsConstructor

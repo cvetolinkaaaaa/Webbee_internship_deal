@@ -12,6 +12,7 @@ import lombok.Setter;
 
 /**
  * Сущность "Роль контрагента".
+ * @author Evseeva Tsvetolina
  */
 @NoArgsConstructor
 @AllArgsConstructor

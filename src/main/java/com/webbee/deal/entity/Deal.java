@@ -19,6 +19,7 @@ import lombok.Setter;
 
 /**
  * Сущность "Сделка".
+ * @author Evseeva Tsvetolina
  */
 @Entity
 @Table(name = "deal")

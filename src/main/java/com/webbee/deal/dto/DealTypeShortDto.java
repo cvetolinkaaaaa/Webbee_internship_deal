@@ -8,6 +8,7 @@ import lombok.Setter;
 
 /**
  * DTO, кратко описывающий тип сделки.
+ * @author Evseeva Tsvetolina
  */
 @NoArgsConstructor
 @AllArgsConstructor

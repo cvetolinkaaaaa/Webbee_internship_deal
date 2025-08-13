@@ -18,6 +18,7 @@ import java.util.UUID;
 
 /**
  * Контроллер для управления связями между контрагентами и ролями.
+ * @author Evseeva Tsvetolina
  */
 @RestController
 @RequestMapping("/contractor-to-role")

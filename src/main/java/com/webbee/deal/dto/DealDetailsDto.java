@@ -13,6 +13,7 @@ import lombok.Setter;
 
 /**
  * DTO с подробной информацией о сделке.
+ * @author Evseeva Tsvetolina
  */
 @NoArgsConstructor
 @AllArgsConstructor

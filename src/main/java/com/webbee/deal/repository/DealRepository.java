@@ -6,6 +6,7 @@ import java.util.UUID;
 
 /**
  * Репозиторий для работы с сущностью Deal.
+ * @author Evseeva Tsvetolina
  */
 public interface DealRepository extends JpaRepository<Deal, UUID>, DealCustomRepository{
 

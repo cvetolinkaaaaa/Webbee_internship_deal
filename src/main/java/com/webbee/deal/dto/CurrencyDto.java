@@ -10,6 +10,7 @@ import lombok.Setter;
 /**
  * DTO, представляющий валюту.
  * Используется для передачи информации о валюте в системе.
+ * @author Evseeva Tsvetolina
  */
 @NoArgsConstructor
 @AllArgsConstructor

@@ -9,6 +9,7 @@ import lombok.Setter;
 
 /**
  * DTO для представления статуса сделки.
+ * @author Evseeva Tsvetolina
  */
 @NoArgsConstructor
 @AllArgsConstructor

@@ -11,6 +11,7 @@ import lombok.Setter;
 
 /**
  * Сущность "Валюта".
+ * @author Evseeva Tsvetolina
  */
 @Entity
 @Table(name = "currency")

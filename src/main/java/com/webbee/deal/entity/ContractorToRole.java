@@ -15,6 +15,7 @@ import lombok.Setter;
 
 /**
  * Сущность, отражающая связь между контрагентом и его ролью.
+ * @author Evseeva Tsvetolina
  */
 @Entity
 @Table(name = "contractor_to_role")

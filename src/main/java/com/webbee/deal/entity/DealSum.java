@@ -18,6 +18,7 @@ import lombok.Setter;
 
 /**
  * Сущность, описывающая сумму сделки.
+ * @author Evseeva Tsvetolina
  */
 @Entity
 @Table(name = "deal_sum")

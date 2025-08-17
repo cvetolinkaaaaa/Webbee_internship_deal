@@ -1,5 +1,6 @@
 package com.webbee.deal.service;
 
+import com.webbee.audit_lib.starter.core.AuditLog;
 import com.webbee.deal.dto.DealDetailsDto;
 import com.webbee.deal.dto.DealDto;
 import com.webbee.deal.dto.DealSearchRequest;
@@ -35,6 +36,7 @@ public class DealService {
     /**
      * Создает или обновляет сделку.
      */
+    @AuditLog
     @Transactional
     public DealDto saveDeal(DealDto dto) {
         Deal deal;

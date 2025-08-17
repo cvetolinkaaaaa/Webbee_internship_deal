@@ -1,5 +1,6 @@
 package com.webbee.deal.service;
 
+import com.webbee.audit_lib.starter.core.AuditLog;
 import com.webbee.deal.dto.ContractorRoleShortDto;
 import com.webbee.deal.dto.DealContractorShortDto;
 import com.webbee.deal.dto.DealDetailsDto;
@@ -49,6 +50,7 @@ public class DealDetailsService {
     /**
      * Возвращает подробную информацию по сделке.
      */
+    @AuditLog(logLevel = AuditLog.LogLevel.INFO)
     public DealDetailsDto getDealDetails(UUID dealId) {
         Deal deal = dealRepository.findById(dealId)
                 .orElseThrow(() -> new EntityNotFoundException("Deal not found: " + dealId));

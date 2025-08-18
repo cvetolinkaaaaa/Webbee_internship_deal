@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-simplified-inbox-event-table
+      author: developer
+      changes:
+        - createTable:
+            tableName: inbox_event
+            columns:
+              - column:
+                  name: id
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: message_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: aggregate_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: aggregate_type
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: event_type
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: event_data
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: event_timestamp
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: received_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: processed_at
+                  type: timestamp
+              - column:
+                  name: status
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ignore_reason
+                  type: varchar(500)

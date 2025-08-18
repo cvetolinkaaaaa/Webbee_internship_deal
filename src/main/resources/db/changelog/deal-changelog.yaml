@@ -307,3 +307,5 @@ databaseChangeLog:
             referencedColumnNames: id
   - include:
       file: db/changelog/deal-data.yaml
+  - include:
+      file: db/changelog/inbox-event.yaml

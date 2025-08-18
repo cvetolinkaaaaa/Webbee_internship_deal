@@ -15,4 +15,6 @@ public interface DealContractorRepository extends JpaRepository<DealContractor, 
      */
     List<DealContractor> findByDealIdAndIsActiveTrue(UUID dealId);
 
+    List<DealContractor> findByContractorIdAndIsActiveTrue(String contractorId);
+
 }

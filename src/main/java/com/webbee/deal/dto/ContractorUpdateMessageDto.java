@@ -11,19 +11,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContractorUpdateMessageDto {
-    
+
     /**
      * Идентификатор контрагента.
      */
     private String contractorId;
-    
+
     /**
      * Наименование контрагента.
      */
     private String name;
-    
+
     /**
      * ИНН контрагента.
      */
     private String inn;
+
 }
